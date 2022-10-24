@@ -1,5 +1,6 @@
 import React from "react";
 
+//Created Nav.js to hold nav items
 const Nav = (props) => {
   <nav class="main-nav">
     <ul>
