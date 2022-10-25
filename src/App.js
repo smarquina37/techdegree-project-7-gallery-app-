@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
+//App Components
 import Nav from "./components/Nav";
 import PhotoContainer from "./components/PhotoContainer";
+import NotFound from "./components/NotFound";
+import SearchForm from "./components/SearchForm";
 
 const apiKey = "12222dadc027d3672098626fecc10a80";
 
@@ -23,7 +27,10 @@ const App = (props) => {
   // }, []);
   return (
     <div className="container">
+      <SearchForm />
       <Nav />
+      <PhotoContainer />
+      {/* <NotFound /> */}
     </div>
   );
 };
