@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 //Created Nav.js to hold nav items
 const Nav = (props) => {
@@ -6,13 +7,13 @@ const Nav = (props) => {
     <nav class="main-nav">
       <ul>
         <li>
-          <a href="/cats">Cats</a>
+          <NavLink to="/nav/cats">Cats</NavLink>
         </li>
         <li>
-          <a href="/dogs">Dogs</a>
+          <NavLink to="/nav/dogs">Dogs</NavLink>
         </li>
         <li>
-          <a href="/computers">Computers</a>
+          <NavLink to="/nav/computers">Computers</NavLink>
         </li>
       </ul>
     </nav>
