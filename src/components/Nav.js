@@ -2,18 +2,24 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 //Created Nav.js to hold nav items
-const Nav = (props) => {
+const Nav = ({ fetchData }) => {
   return (
-    <nav class="main-nav">
+    <nav className="main-nav">
       <ul>
         <li>
-          <NavLink to="/nav/cats">Cats</NavLink>
+          <NavLink to="/cats" onClick={() => fetchData("cats")}>
+            Cats
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/nav/dogs">Dogs</NavLink>
+          <NavLink to="/dogs" onClick={() => fetchData("dogs")}>
+            Dogs
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/nav/computers">Computers</NavLink>
+          <NavLink to="/computers" onClick={() => fetchData("computers")}>
+            Computers
+          </NavLink>
         </li>
       </ul>
     </nav>
