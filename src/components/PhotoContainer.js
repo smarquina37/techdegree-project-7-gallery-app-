@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Photo from "./Photo";
+import SearchForm from "./SearchForm";
 
 const PhotoContainer = (props) => {
   let { keyword } = useParams();
