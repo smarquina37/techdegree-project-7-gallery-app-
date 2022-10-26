@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SearchForm = () => {
+const SearchForm = (props) => {
   const [searchText, setSearchText] = useState("");
 
   const onSearchChange = (e) => {
@@ -9,14 +9,14 @@ const SearchForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSearch(searchText);
+    props.onSearch(searchText);
     e.currentTarget.reset();
   };
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <input
         type="search"
-        onChange={(e) => onSearchChange(e)}
+        onChange={onSearchChange}
         name="search"
         placeholder="Search"
         required
