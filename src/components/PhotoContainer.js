@@ -10,7 +10,7 @@ const PhotoContainer = (props) => {
       secret={photo.secret}
       id={photo.id}
       key={photo.id}
-      title={photo.server}
+      title={photo.title}
     />
   ));
   return (

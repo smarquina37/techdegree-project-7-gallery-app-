@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import axios from "axios";
 import apiKey from "./config";
@@ -18,7 +18,7 @@ const App = (props) => {
   const [photos, setPhotos] = useState([]);
 
   // useEffect(() => {
-  const fetchData = (tags) => {
+  const performSearch = (tags) => {
     axios
       .get(
         `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tags}&per_page=24&format=json&nojsoncallback=1`
@@ -30,10 +30,11 @@ const App = (props) => {
         console.log("Error fetching and parsing data", error);
       });
   };
+
   return (
     <div className="container">
-      <SearchForm />
-      <Nav fetchData={fetchData} />
+      <SearchForm onSearch={performSearch} />
+      <Nav performSearch={performSearch} />
       <Routes>
         <Route path="/" element={<Navigate to="/cats" />} />
         <Route path="/cats" element={<PhotoContainer data={photos} />} />
