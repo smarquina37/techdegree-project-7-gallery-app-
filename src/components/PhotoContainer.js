@@ -1,7 +1,10 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import Photo from "./Photo";
 
 const PhotoContainer = (props) => {
+  let { keyword } = useParams();
+
   const results = props.data;
   //Incomplete map of <Photo/>
   let photos = results.map((photo) => (

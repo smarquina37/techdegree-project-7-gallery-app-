@@ -37,6 +37,7 @@ const App = (props) => {
       <Nav performSearch={performSearch} />
       <Routes>
         <Route path="/" element={<Navigate to="/cats" />} />
+        {/* <Route path=":search/:keyword" element={<PhotoContainer />} /> */}
         <Route path="/cats" element={<PhotoContainer data={photos} />} />
         <Route path="/dogs" element={<PhotoContainer data={photos} />} />
         <Route path="/computers" element={<PhotoContainer data={photos} />} />
