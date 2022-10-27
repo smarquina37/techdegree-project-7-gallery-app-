@@ -1,23 +1,29 @@
-import React, { useState } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import apiKey from "./config";
 
 //App Components
-// import Home from "./components/Home";
 import SearchForm from "./components/SearchForm";
 import Nav from "./components/Nav";
 import PhotoContainer from "./components/PhotoContainer";
 import NotFound from "./components/NotFound";
-// import Cats from "./components/Nav/Cats";
-// import Dogs from "./components/Nav/Dogs";
-// import Computers from "./components/Nav/Computers";
 
 const App = (props) => {
-  //Need to add initial state
+  const location = useLocation();
+  //Need to add initial state for photos
   const [photos, setPhotos] = useState([]);
 
-  // useEffect(() => {
+  // Use the useLocation hook from react-router to check for changes in the URL - displays UI changes with browsers buttons
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      performSearch(location.pathname.replace("/", ""));
+    } else {
+      performSearch();
+    }
+  }, [location.pathname]);
+
+  // Function will fetch data from the API using axios
   const performSearch = (tags) => {
     axios
       .get(
@@ -37,13 +43,14 @@ const App = (props) => {
       <Nav performSearch={performSearch} />
       <Routes>
         <Route path="/" element={<Navigate to="/cats" />} />
-        <Route
-          path=":search/:keyword"
-          element={<PhotoContainer data={photos} />}
-        />
         <Route path="/cats" element={<PhotoContainer data={photos} />} />
         <Route path="/dogs" element={<PhotoContainer data={photos} />} />
         <Route path="/computers" element={<PhotoContainer data={photos} />} />
+        {/* <Route index element={<PhotoContainer data={photos} />} /> */}
+        <Route
+          path="/search/:keyword"
+          element={<PhotoContainer data={photos} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
