@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const SearchForm = (props) => {
   const [searchText, setSearchText] = useState("");
-  // const keyword = useRef();
   let navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -18,7 +17,6 @@ const SearchForm = (props) => {
     <form className="search-form" onSubmit={handleSubmit}>
       <input
         type="search"
-        // ref={keyword}
         onChange={(e) => {
           setSearchText(e.target.value);
         }}

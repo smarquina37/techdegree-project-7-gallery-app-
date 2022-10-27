@@ -16,7 +16,7 @@ const App = (props) => {
   const [dogs, setDogs] = useState([]);
   const [computers, setComputers] = useState([]);
 
-  // Use the useLocation hook from react-router to help display default photos in function below
+  // Upon page loading, we call performSearch function to display photos depending on which state called
   useEffect(() => {
     performSearch();
     performSearch("cats");
