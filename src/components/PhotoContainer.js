@@ -1,11 +1,7 @@
 import React from "react";
-// import { useParams } from "react-router-dom";
 import Photo from "./Photo";
-// import NotFound from "./NotFound";
 
 const PhotoContainer = (props) => {
-  // let { keyword } = useParams();
-
   const results = props.data;
   // Map through photo data from API
   let photos = results.map((photo) => (
@@ -42,9 +38,3 @@ export default PhotoContainer;
 //   } else {
 //     photos = <NotFound />;
 //   }
-//   return (
-//     <div className="photo-container">
-//       <ul>{photos}</ul>
-//     </div>
-//   );
-// };

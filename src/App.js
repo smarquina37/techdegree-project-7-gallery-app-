@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import axios from "axios";
 import apiKey from "./config";
 
@@ -10,27 +10,36 @@ import PhotoContainer from "./components/PhotoContainer";
 import NotFound from "./components/NotFound";
 
 const App = (props) => {
-  const location = useLocation();
   //Need to add initial state for photos
   const [photos, setPhotos] = useState([]);
+  const [cats, setCats] = useState([]);
+  const [dogs, setDogs] = useState([]);
+  const [computers, setComputers] = useState([]);
 
-  // Use the useLocation hook from react-router to check for changes in the URL - displays UI changes with browsers buttons
+  // Use the useLocation hook from react-router to help display default photos in function below
   useEffect(() => {
-    if (location.pathname !== "/") {
-      performSearch(location.pathname.replace("/", ""));
-    } else {
-      performSearch();
-    }
-  }, [location.pathname]);
+    performSearch();
+    performSearch("cats");
+    performSearch("dogs");
+    performSearch("computers");
+  }, []);
 
   // Function will fetch data from the API using axios
-  const performSearch = (tags) => {
+  const performSearch = (tags = "cats") => {
     axios
       .get(
         `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tags}&per_page=24&format=json&nojsoncallback=1`
       )
       .then((resp) => {
-        setPhotos(resp.data.photos.photo);
+        if (tags === "cats") {
+          setCats(resp.data.photos.photo);
+        } else if (tags === "dogs") {
+          setDogs(resp.data.photos.photo);
+        } else if (tags === "computers") {
+          setComputers(resp.data.photos.photo);
+        } else {
+          setPhotos(resp.data.photos.photo);
+        }
       })
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
@@ -40,13 +49,15 @@ const App = (props) => {
   return (
     <div className="container">
       <SearchForm onSearch={performSearch} />
-      <Nav performSearch={performSearch} />
+      <Nav />
       <Routes>
         <Route path="/" element={<Navigate to="/cats" />} />
-        <Route path="/cats" element={<PhotoContainer data={photos} />} />
-        <Route path="/dogs" element={<PhotoContainer data={photos} />} />
-        <Route path="/computers" element={<PhotoContainer data={photos} />} />
-        {/* <Route index element={<PhotoContainer data={photos} />} /> */}
+        <Route path="/cats" element={<PhotoContainer data={cats} />} />
+        <Route path="/dogs" element={<PhotoContainer data={dogs} />} />
+        <Route
+          path="/computers"
+          element={<PhotoContainer data={computers} />}
+        />
         <Route
           path="/search/:keyword"
           element={<PhotoContainer data={photos} />}
